@@ -1,11 +1,7 @@
+import CarForm from "@/components/Cars/CarForm";
 
-
-const AddCar = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+const AddCarPage = () => {
+  return <CarForm />;
 };
 
-export default AddCar;
+export default AddCarPage;
