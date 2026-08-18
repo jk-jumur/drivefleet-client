@@ -1,11 +1,7 @@
+import ExploreCars from "@/components/Cars/ExploreCars";
 
-
-const ExploreCars = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+const ExploreCarsPage = () => {
+  return <ExploreCars />;
 };
 
-export default ExploreCars;
+export default ExploreCarsPage;
