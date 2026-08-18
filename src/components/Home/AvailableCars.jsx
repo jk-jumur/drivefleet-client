@@ -14,7 +14,7 @@ const AvailableCars = () => {
     const fetchCars = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:5000/api/cars");
+        const response = await fetch(`{process.env.NEXT_PUBLIC_SERVER_URL}/api/cars`);
         const data = await response.json();
 
         if (!response.ok) {
