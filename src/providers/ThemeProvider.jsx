@@ -10,6 +10,7 @@ export function ThemeProvider({ children }) {
       attribute="class"
       defaultTheme="light"
       enableSystem={false}
+      themes={["light", "dark"]}
       disableTransitionOnChange
     >
       {children}

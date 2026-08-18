@@ -12,18 +12,23 @@ const ThemeToggle = () => {
     setMounted(true);
   }, []);
 
-  // Skeleton during hydration to prevent layout shift
   if (!mounted) {
-    return <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 animate-pulse" />;
+    return <div className="h-9 w-9 animate-pulse rounded-xl border border-slate-200 bg-slate-100 dark:border-slate-700 dark:bg-slate-900 sm:h-10 sm:w-10" />;
   }
+
+  const nextTheme = theme === "dark" ? "light" : "dark";
 
   return (
     <button
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      aria-label="Toggle theme"
-      className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-base sm:text-lg text-slate-600 transition-all hover:bg-slate-100 hover:text-amber-500 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-amber-400"
+      onClick={() => setTheme(nextTheme)}
+      aria-label={`Switch to ${nextTheme} theme`}
+      title={`Switch to ${nextTheme} theme`}
+      className="group relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl border border-slate-200 bg-white text-slate-700 shadow-[0_10px_20px_rgba(15,23,42,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(91,124,255,0.18)] dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 sm:h-10 sm:w-10"
     >
-      {theme === "dark" ? <FiSun /> : <FiMoon />}
+      <span className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/5 to-cyan-500/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <span className="relative z-10 text-base sm:text-lg">
+        {theme === "dark" ? <FiSun /> : <FiMoon />}
+      </span>
     </button>
   );
 };

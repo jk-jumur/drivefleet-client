@@ -125,18 +125,6 @@ const CarForm = () => {
             Provide accurate information about your vehicle so renters
             can easily find and book your car.
           </p>
-
-          <div className="mt-5">
-            <Button
-              color="secondary"
-              variant="flat"
-              isLoading={seeding}
-              onPress={handleSeedAllCars}
-              className="bg-purple-600/20 text-purple-300 hover:bg-purple-600/30 font-medium"
-            >
-              {seeding ? "Adding All Cars..." : "🚀 Quick Add All 12 Cars from JSON"}
-            </Button>
-          </div>
         </div>
 
         {/* Form */}

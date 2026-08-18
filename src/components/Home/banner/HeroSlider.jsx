@@ -29,17 +29,17 @@ const HeroSlider = ({ sliderData }) => {
   const theme = currentSlide.themeColor;
 
   return (
-    <section className="relative h-[85vh] sm:h-[90vh] w-full overflow-hidden bg-zinc-950 flex items-center">
-      
-      {/* Background Image with Smooth Sliding/Fading Effect */}
+    <section className="relative h-[68vh] w-full overflow-hidden bg-[#07111d] sm:h-[74vh] md:h-[80vh]">
+      <div className="network-grid absolute inset-0 z-0 opacity-80" />
+
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide.id}
-          initial={{ opacity: 0, x: 100 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -100 }}
+          initial={{ opacity: 0, scale: 1.04 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 1.02 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="absolute inset-0 z-0 w-full h-full"
+          className="absolute inset-0 z-0 h-full w-full"
         >
           <Image
             src={currentSlide.image}
@@ -47,66 +47,59 @@ const HeroSlider = ({ sliderData }) => {
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center"
+            className="object-cover object-center opacity-20 grayscale"
           />
-         
-          <div className="absolute inset-0 bg-linear-to-r from-zinc-950/70 via-zinc-950/30 to-transparent"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(96,165,250,0.18),transparent_24%),linear-gradient(90deg,rgba(2,6,23,0.9)_0%,rgba(2,6,23,0.82)_30%,rgba(2,6,23,0.44)_62%,rgba(2,6,23,0.32)_100%)]" />
         </motion.div>
       </AnimatePresence>
 
-      {/* Content Container (Full Width Banner Content) */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
-        <div className="grid grid-cols-1 items-center lg:grid-cols-12 gap-8">
-          
-          {/* Left Content Area */}
-          <div className="lg:col-span-8">
+      <div className="relative z-10 mx-auto flex h-full w-full max-w-7xl items-center px-4 sm:px-6 lg:px-8">
+        <div className="grid w-full grid-cols-1 items-center gap-8 lg:grid-cols-[1.45fr_0.55fr]">
+          <div>
             <AnimatePresence mode="wait">
               <motion.div
-                key={currentSlide.id}
-                initial={{ opacity: 0, y: 30 }}
+                key={`${currentSlide.id}-content`}
+                initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -30 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-                className="flex flex-col items-start text-left"
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.45, ease: "easeOut" }}
+                className="max-w-3xl"
               >
-                {/* Badge */}
-                <div className={`mb-3 inline-flex items-center gap-2 rounded-full border px-3.5 py-1 text-xs sm:text-sm font-semibold backdrop-blur-md shadow-lg ${theme.bgBadge} text-white`}>
-                  <span className={`flex h-2 w-2 rounded-full animate-pulse ${theme.dot}`}></span>
+                <div className={`mb-4 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[9px] font-semibold uppercase tracking-[0.22em] backdrop-blur-md sm:text-[10px] ${theme.bgBadge}`}>
+                  <span className={`h-2 w-2 rounded-full ${theme.dot} animate-pulse`} />
                   {currentSlide.badge}
                 </div>
 
-                {/* Main Heading */}
-                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white drop-shadow-md leading-[1.15]">
+                <h1 className="text-3xl font-black leading-[0.96] tracking-[-0.06em] text-white drop-shadow-[0_12px_30px_rgba(0,0,0,0.38)] sm:text-5xl lg:text-6xl">
                   {currentSlide.titleLine1}{" "}
-                  <span className={`bg-linear-to-r ${theme.accent} bg-clip-text text-transparent block sm:inline mt-1 sm:mt-0`}>
+                  <span className={`mt-2 block bg-gradient-to-r ${theme.accent} bg-clip-text text-transparent`}>
                     {currentSlide.titleLine2}
                   </span>
                 </h1>
 
-                {/* Description */}
-                <p className="mt-4 text-sm sm:text-base text-zinc-200 max-w-xl drop-shadow-sm leading-relaxed">
+                <p className="mt-4 max-w-xl text-sm leading-7 text-slate-200 sm:text-base">
                   {currentSlide.description}
                 </p>
 
-                {/* Price Tag */}
-                <div className="mt-4 inline-block rounded-xl border border-white/15 bg-zinc-950/60 px-4 py-2 backdrop-blur-md shadow-md">
-                  <span className="text-xs text-zinc-300">Rental Rate: </span>
-                  <span className={`text-sm sm:text-base font-bold ${theme.text}`}>{currentSlide.price}</span>
+                <div className="mt-6 flex flex-wrap items-center gap-3">
+                  <div className="inline-flex rounded-2xl border border-white/15 bg-slate-950/50 px-3 py-2 backdrop-blur-md sm:px-4">
+                    <span className="text-[9px] uppercase tracking-[0.2em] text-slate-300 sm:text-[10px]">Rental Rate</span>
+                    <span className={`ml-2 text-sm font-bold text-white sm:text-base ${theme.text}`}>{currentSlide.price}</span>
+                  </div>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="mt-5 flex flex-wrap items-center gap-3">
+                <div className="mt-6 flex flex-wrap items-center gap-3">
                   <Link
                     href="/explore-cars"
-                    className={`group inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-sm sm:text-base font-bold shadow-xl transition-all hover:scale-105 ${theme.button}`}
+                    className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#5e8dff] via-[#67d9d6] to-[#7b6df2] px-4 py-2.5 text-xs font-bold text-white shadow-[0_14px_35px_rgba(94,141,255,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110 sm:px-5 sm:py-3 sm:text-sm"
                   >
                     Explore Cars
-                    <FiArrowRight className="transition-transform group-hover:translate-x-1" />
+                    <FiArrowRight className="text-sm transition-transform duration-300 group-hover:translate-x-1" />
                   </Link>
-                  
+
                   <Link
                     href="/add-car"
-                    className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-zinc-900/50 px-6 py-3.5 text-sm sm:text-base font-bold text-white backdrop-blur-md transition-all hover:bg-zinc-800"
+                    className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-slate-950/60 px-4 py-2.5 text-xs font-bold text-white shadow-[0_10px_28px_rgba(2,6,23,0.45)] backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-sky-300/40 hover:bg-slate-900/80 sm:px-5 sm:py-3 sm:text-sm"
                   >
                     List Your Car
                   </Link>
@@ -115,47 +108,70 @@ const HeroSlider = ({ sliderData }) => {
             </AnimatePresence>
           </div>
 
-          {/* Right Controls Area (Navigation Buttons) */}
-          <div className="lg:col-span-4 flex flex-col items-start lg:items-end justify-end h-full mt-4 lg:mt-0">
-            <div className="flex flex-col gap-3 bg-zinc-950/75 p-4 sm:p-5 rounded-2xl border border-white/15 backdrop-blur-md w-full sm:w-auto shadow-2xl">
-              <div className="flex items-center justify-between gap-6 sm:gap-8">
-                <span className="text-xs sm:text-sm font-bold text-zinc-200 tracking-wider uppercase">
-                  Hypercar {currentIndex + 1} / {sliderData.length}
-                </span>
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={handlePrev}
-                    className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl border border-white/20 bg-zinc-900 text-white transition-all hover:border-white/50 shadow-md"
-                    aria-label="Previous Slide"
-                  >
-                    <FiChevronLeft className="text-base sm:text-lg" />
-                  </button>
-                  <button
-                    onClick={handleNext}
-                    className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl border border-white/20 bg-zinc-900 text-white transition-all hover:border-white/50 shadow-md"
-                    aria-label="Next Slide"
-                  >
-                    <FiChevronRight className="text-base sm:text-lg" />
-                  </button>
+          <div className="flex justify-center lg:justify-end">
+            <div className="glass-panel w-full max-w-sm rounded-[26px] border border-white/10 bg-slate-950/50 p-4 shadow-[0_18px_60px_rgba(2,6,23,0.6)] backdrop-blur-xl">
+              <div className="mb-4 flex items-center justify-between gap-4">
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.24em] text-slate-400">Featured</p>
+                  <p className="mt-1 text-lg font-bold text-white">Luxury Fleet</p>
+                </div>
+                <div className="rounded-full border border-emerald-400/30 bg-emerald-500/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-300">
+                  Live
                 </div>
               </div>
 
-              {/* Progress Indicators */}
-              <div className="flex items-center gap-1.5 sm:gap-2 mt-1">
-                {sliderData.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentIndex(index)}
-                    className={`h-1.5 sm:h-2 rounded-full transition-all ${
-                      currentIndex === index ? `w-6 sm:w-8 ${theme.dot}` : "w-2 bg-zinc-700 hover:bg-zinc-500"
-                    }`}
-                    aria-label={`Go to slide ${index + 1}`}
-                  />
+              <div className="space-y-3">
+                {[
+                  { label: "Premium cars", value: "120+" },
+                  { label: "Avg. rating", value: "4.9/5" },
+                  { label: "Supports", value: "24/7" },
+                ].map((stat) => (
+                  <div key={stat.label} className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-slate-400">{stat.label}</span>
+                    <span className="text-lg font-black text-white">{stat.value}</span>
+                  </div>
                 ))}
+              </div>
+
+              <div className="mt-4 rounded-2xl border border-white/10 bg-slate-900/70 p-3">
+                <div className="flex items-center justify-between gap-3">
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-slate-400">Current Show</span>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-white">
+                    {currentIndex + 1}/{sliderData.length}
+                  </span>
+                </div>
+                <div className="mt-3 flex items-center gap-2">
+                  {sliderData.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentIndex(index)}
+                      className={`h-1.5 rounded-full transition-all duration-300 ${
+                        currentIndex === index ? "w-8 bg-white" : "w-2 bg-white/30 hover:bg-white/60"
+                      }`}
+                      aria-label={`Go to slide ${index + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-4 flex items-center justify-between gap-3">
+                <button
+                  onClick={handlePrev}
+                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 bg-white/5 text-white transition hover:border-white/30 hover:bg-white/10"
+                  aria-label="Previous Slide"
+                >
+                  <FiChevronLeft />
+                </button>
+                <button
+                  onClick={handleNext}
+                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 bg-white/5 text-white transition hover:border-white/30 hover:bg-white/10"
+                  aria-label="Next Slide"
+                >
+                  <FiChevronRight />
+                </button>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>

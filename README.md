@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# DriveFleet
+
+DriveFleet is a modern car rental platform built for browsing, booking, and managing vehicle listings in a clean and recruiter-friendly interface.
+
+Live site: https://drivefleet-client.vercel.app
+
+## Features
+- Browse premium cars with responsive card layouts and search/filter support
+- View full car details and book a vehicle directly from the detail page
+- Add, update, and delete car listings from private protected routes
+- Track personal bookings with a dedicated my bookings dashboard
+- Modern dark/light UI, animated hero banner, and mobile-friendly layout
+- Clean user authentication pages with password validation and page-level routing
+
+## Tech Stack
+- Next.js
+- React
+- Tailwind CSS
+- Framer Motion
+- Local mock data for frontend demo
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open http://localhost:3000 in your browser.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+src/
+  app/
+  components/
+  data/
+  lib/
+  providers/
+```
 
-## Learn More
+## Notes
+This client app is designed as the frontend portion of the DriveFleet assignment. The backend API and database work should be kept in a separate repository with its own environment variables and JWT setup.
 
-To learn more about Next.js, take a look at the following resources:
+## Deployment
+The project is intended to be deployed on Vercel and can be connected to a production API URL via environment variables such as:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+NEXT_PUBLIC_SERVER_URL=https://your-api-url.com
+```
