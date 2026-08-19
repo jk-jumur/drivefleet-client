@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import toast from "react-hot-toast";
 import {
   Input,
   Button,
@@ -46,6 +47,7 @@ const CarForm = () => {
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
   const [seeding, setSeeding] = useState(false);
+  const [status, setStatus] = useState({ type: "", message: "" });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -58,6 +60,7 @@ const CarForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setStatus({ type: "", message: "" });
 
     try {
       const response = await fetch(`${API_BASE_URL}/cars`, {
@@ -74,13 +77,13 @@ const CarForm = () => {
         throw new Error(data.message || "Failed to add car");
       }
 
-      console.log("Car added successfully:", data);
-      alert("Car added successfully!");
+      toast.success("Car added successfully.");
+      setStatus({ type: "success", message: "Car added successfully." });
       setFormData(initialFormData);
-
     } catch (error) {
       console.error("Failed to add car:", error);
-      alert(error.message);
+      toast.error(error.message || "Failed to add car.");
+      setStatus({ type: "error", message: error.message || "Failed to add car." });
     } finally {
       setLoading(false);
     }
@@ -90,6 +93,8 @@ const CarForm = () => {
   const handleSeedAllCars = async () => {
     if (!window.confirm("Do you want to add all 12 cars from JSON to the database at once?")) return;
     setSeeding(true);
+    setStatus({ type: "", message: "" });
+
     try {
       for (const car of allCarsData) {
         await fetch(`${API_BASE_URL}/cars`, {
@@ -98,10 +103,12 @@ const CarForm = () => {
           body: JSON.stringify(car),
         });
       }
-      alert("All 12 cars added successfully!");
+      toast.success("All 12 cars were added successfully.");
+      setStatus({ type: "success", message: "All 12 cars were added successfully." });
     } catch (error) {
       console.error("Error seeding cars:", error);
-      alert("Failed to seed cars");
+      toast.error("Failed to seed cars.");
+      setStatus({ type: "error", message: "Failed to seed cars." });
     } finally {
       setSeeding(false);
     }
@@ -126,6 +133,18 @@ const CarForm = () => {
             can easily find and book your car.
           </p>
         </div>
+
+        {status.message && (
+          <div
+            className={`mb-6 rounded-xl border px-4 py-3 text-sm ${
+              status.type === "success"
+                ? "border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-800 dark:bg-emerald-950/30 dark:text-emerald-300"
+                : "border-red-200 bg-red-50 text-red-700 dark:border-red-800 dark:bg-red-950/30 dark:text-red-300"
+            }`}
+          >
+            {status.message}
+          </div>
+        )}
 
         {/* Form */}
         <form

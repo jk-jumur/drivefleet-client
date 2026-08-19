@@ -88,7 +88,7 @@ const CarCard = ({ car }) => {
         <div className="mt-auto">
           <Link
             href={`/cars/${car._id}`}
-            className="group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-[#5e8dff] via-[#67d9d6] to-[#7b6df2] py-3 text-xs font-bold text-white shadow-[0_18px_30px_rgba(94,141,255,0.28)] transition-all duration-300 hover:brightness-110 hover:shadow-[0_22px_40px_rgba(94,141,255,0.35)] active:scale-[0.98]"
+            className="group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-[#5e8dff] via-[#67d9d6] to-[#7b6df2] py-3 text-xs font-bold uppercase tracking-[0.18em] text-white shadow-[0_18px_30px_rgba(94,141,255,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_22px_40px_rgba(94,141,255,0.35)] active:scale-[0.98]"
           >
             <span>View Details</span>
             <svg className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -6,6 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { FiMenu, FiX, FiChevronDown, FiLogOut, FiUser } from "react-icons/fi";
 import { authClient } from "@/lib/auth-client"; 
+import toast from "react-hot-toast";
 
 const profileLinks = [
   { name: "Add Car", href: "/add-car" },
@@ -21,10 +22,24 @@ const UserMenu = ({ navLinks }) => {
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
 
-  const handleLogout = async () => {
-    await authClient.signOut();
-    setProfileOpen(false);
-    setMobileMenuOpen(false);
+ const handleLogout = async () => {
+    try {
+      const { error } = await authClient.signOut();
+      
+      if (error) {
+        toast.error(error.message || "Logout failed. Please try again.");
+        return;
+      }
+
+      toast.success("Successfully logged out!");
+      setProfileOpen(false);
+      setMobileMenuOpen(false);
+      
+      
+      window.location.href = "/"; 
+    } catch (err) {
+      toast.error("An unexpected error occurred during logout.");
+    }
   };
 
   const isActive = (href) => {
