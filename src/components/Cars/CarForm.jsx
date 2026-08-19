@@ -40,12 +40,12 @@ const initialFormData = {
   bookingCount: 0,
 };
 
+const API_BASE_URL = "http://localhost:5000/api";
+
 const CarForm = () => {
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
   const [seeding, setSeeding] = useState(false);
-
-  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -60,7 +60,7 @@ const CarForm = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/cars", {
+      const response = await fetch(`${API_BASE_URL}/cars`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -92,7 +92,7 @@ const CarForm = () => {
     setSeeding(true);
     try {
       for (const car of allCarsData) {
-        await fetch("http://localhost:5000/api/cars", {
+        await fetch(`${API_BASE_URL}/cars`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(car),
