@@ -1,6 +1,6 @@
 const API_BASE_URL = "http://localhost:5000/api";
 
-// ১. নতুন বুকিং তৈরি ও সাবমিট করার ফাংশন (POST)
+// ১. new booking create and submition function(POST)
 export const createBookingInAPI = async (bookingData) => {
   try {
     const response = await fetch(`${API_BASE_URL}/bookings`, {
@@ -23,7 +23,7 @@ export const createBookingInAPI = async (bookingData) => {
   }
 };
 
-// ২. নির্দিষ্ট ইউজারের বুকিংগুলো ফেচ করার ফাংশন (GET)
+// 2 new user booking function (GET)
 export const getBookingsByUserFromAPI = async (email) => {
   try {
     const response = await fetch(`${API_BASE_URL}/bookings?email=${email}`, {

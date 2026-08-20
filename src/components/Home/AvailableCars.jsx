@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import CarCard from "../Cars/ CarCard";
+import CarCard from "../Cars/CarCard";
 import { getCarsFromAPI } from "@/services/carService";
 
 const AvailableCars = () => {

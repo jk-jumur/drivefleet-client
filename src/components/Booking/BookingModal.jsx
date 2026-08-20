@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Modal, Button, useOverlayState } from "@heroui/react";
+import { Modal, Button,  } from "@heroui/react";
 import { FaCar, FaUserTie, FaCalendarAlt } from "react-icons/fa";
 
 export default function BookingModal({ isOpen, onClose, car, bookingData, onConfirm, loading }) {
@@ -80,7 +80,7 @@ export default function BookingModal({ isOpen, onClose, car, bookingData, onConf
                 color="primary" 
                 onPress={onConfirm}
                 isLoading={loading}
-                className="w-full py-3 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold shadow-lg shadow-cyan-500/25 hover:opacity-95 transition-all text-sm"
+                className="w-full py-3 rounded-2xl bg-linear-to-r from-cyan-500 to-blue-600 text-white font-bold shadow-lg shadow-cyan-500/25 hover:opacity-95 transition-all text-sm"
               >
                 Confirm & Book Now
               </Button>

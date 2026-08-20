@@ -1,15 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation"; // 1. Imported router for redirection
 import toast from "react-hot-toast";
 import { FaCheckCircle, FaShieldAlt } from "react-icons/fa";
 import BookingModal from "./BookingModal"; 
 import { createBookingInAPI } from "@/services/bookingService";
 import { authClient } from "@/lib/auth-client";
 
-
 export default function BookingForm({ car }) {
-  // 2. Fetch the active user session using Better Auth client hook
+  const router = useRouter(); // 2. Initialized router
+  // Fetch active user session using Better Auth client hook
   const { data: session } = authClient.useSession();
 
   const [booking, setBooking] = useState({ driverNeeded: "Yes", specialNote: "" });
@@ -17,6 +18,7 @@ export default function BookingForm({ car }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // Opening the modal is now free for everyone 
   const handleOpenModal = (e) => {
     e.preventDefault();
     if (!car) return;
@@ -29,8 +31,16 @@ export default function BookingForm({ car }) {
     setIsModalOpen(true);
   };
 
-  // 3. Handle modal confirmation and direct backend API call with dynamic user email
+  // 3. Login check is now added inside the modal's confirmation handler
   const handleConfirmBooking = async () => {
+    // Check if the user is authenticated when trying to confirm inside the modal
+    if (!session?.user) {
+      toast.error("Please login first to confirm your booking!");
+      setIsModalOpen(false); // Close the modal
+      router.push("/login"); // Redirect to login page
+      return;
+    }
+
     setLoading(true);
     
     try {

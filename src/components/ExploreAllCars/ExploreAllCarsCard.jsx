@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 
-const ExploreAllCars = ({ initialCars = [] }) => {
+const ExploreAllCarsCard = ({ initialCars = [] }) => {
   const [cars, setCars] = useState(initialCars);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
@@ -170,4 +170,4 @@ const ExploreAllCars = ({ initialCars = [] }) => {
   );
 };
 
-export default ExploreAllCars;
+export default ExploreAllCarsCard;

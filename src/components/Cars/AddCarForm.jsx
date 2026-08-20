@@ -43,7 +43,7 @@ const initialFormData = {
 
 const API_BASE_URL = "http://localhost:5000/api";
 
-const CarForm = () => {
+const AddCarForm = () => {
   const [formData, setFormData] = useState(initialFormData);
   const [loading, setLoading] = useState(false);
   const [seeding, setSeeding] = useState(false);
@@ -389,4 +389,4 @@ const CarForm = () => {
   );
 };
 
-export default CarForm;
+export default AddCarForm;

@@ -27,7 +27,7 @@ export default async function MyBookingsPage() {
         <div className="flex flex-col items-center justify-center py-24 px-4 rounded-3xl border border-dashed border-slate-300 dark:border-white/10 bg-gradient-to-b from-slate-50/50 to-white dark:from-slate-900/40 dark:to-slate-950 text-center shadow-sm">
           <div className="relative mb-6 flex items-center justify-center">
             <div className="absolute h-24 w-24 rounded-full bg-cyan-500/10 dark:bg-cyan-500/20 animate-ping" />
-            <div className="relative h-20 w-20 rounded-2xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white shadow-xl shadow-cyan-500/30">
+            <div className="relative h-20 w-20 rounded-2xl bg-linear-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white shadow-xl shadow-cyan-500/30">
               <FaCarSide className="text-3xl animate-bounce" />
             </div>
           </div>
@@ -39,7 +39,7 @@ export default async function MyBookingsPage() {
           </p>
           <Link
             href="/cars"
-            className="group inline-flex items-center gap-2.5 rounded-2xl bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 px-7 py-4 text-sm font-black uppercase tracking-wider text-white shadow-lg shadow-blue-500/25 transition-all duration-300 hover:scale-105 active:scale-95"
+            className="group inline-flex items-center gap-2.5 rounded-2xl bg-linear-to-r from-cyan-500 via-blue-600 to-indigo-600 px-7 py-4 text-sm font-black uppercase tracking-wider text-white shadow-lg shadow-blue-500/25 transition-all duration-300 hover:scale-105 active:scale-95"
           >
             <span>Explore Fleet & Cars</span>
             <FaArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />

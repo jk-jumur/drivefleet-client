@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { Mail, Lock } from "lucide-react";
-import { signIn } from "@/lib/auth-client"; // আপনার প্রজেক্টের পাথ অনুযায়ী ঠিক করে নিন
+import { signIn } from "@/lib/auth-client"; 
 
 const LoginForm = () => {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -44,13 +44,13 @@ const LoginForm = () => {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-gradient-to-tr from-blue-100 via-indigo-50 to-purple-100 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 px-4 py-12 transition-colors duration-500">
+    <main className="flex min-h-screen items-center justify-center bg-linear-to-tr from-blue-100 via-indigo-50 to-purple-100 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 px-4 py-12 transition-colors duration-500">
       <div className="relative w-full max-w-md overflow-hidden rounded-[28px] border border-slate-200/80 bg-white/90 p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] backdrop-blur-xl transition-all duration-300 dark:border-slate-800 dark:bg-slate-900/90 dark:shadow-[0_20px_60px_rgba(2,6,23,0.45)]">
-        <div className="absolute inset-x-8 top-0 h-24 rounded-b-full bg-gradient-to-r from-blue-100 via-cyan-100 to-indigo-100 blur-2xl dark:from-blue-900/50 dark:via-cyan-900/40 dark:to-indigo-950/60" />
+        <div className="absolute inset-x-8 top-0 h-24 rounded-b-full bg-linear-to-r from-blue-100 via-cyan-100 to-indigo-100 blur-2xl dark:from-blue-900/50 dark:via-cyan-900/40 dark:to-indigo-950/60" />
 
         <div className="relative">
           <div className="mb-6 text-center">
-            <span className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 px-3 py-2 text-lg font-black text-white shadow-lg shadow-blue-500/30">
+            <span className="inline-flex items-center justify-center rounded-2xl bg-linear-to-r from-blue-600 to-cyan-500 px-3 py-2 text-lg font-black text-white shadow-lg shadow-blue-500/30">
               DF
             </span>
             <h1 className="mt-5 text-3xl font-black text-slate-900 dark:text-white">Login</h1>
