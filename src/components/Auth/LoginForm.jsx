@@ -10,32 +10,40 @@ const LoginForm = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validatePassword(form.password)) {
+      toast.error("Password must include uppercase, lowercase, and be at least 6 characters long.");
+      return;
+    }
+
     setLoading(true);
 
     try {
-      const { data, error } = await signIn.email({
+      const { data, error } = await signUp.email({
         email: form.email,
         password: form.password,
+        name: form.name,
+        image: form.photoUrl || "https://via.placeholder.com/150",
       });
 
       if (error) {
-        toast.error(error.message || "Invalid email or password.");
+        toast.error(error.message || "Registration failed.");
         setLoading(false);
         return;
       }
 
-      toast.success("Login successful.");
+      toast.success("Registration successful! Please login with your credentials.");
       setTimeout(() => {
-        window.location.href = "/";
-      }, 800);
+        window.location.href = "/login";
+      }, 1000);
+
     } catch (err) {
       toast.error("An unexpected error occurred.");
       setLoading(false);
     }
   };
-
   const handleGoogleLogin = async () => {
     await signIn.social({
       provider: "google",

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import ActionButtons from "./ActionButtons";
 
-export default function CarCard({ car }) {
+export default function AddedCarCard({ car , onDeleted}) {
   return (
     <div className="group relative w-full max-w-sm rounded-3xl bg-linear-to-br from-cyan-500/10 via-blue-500/5 to-purple-500/10 dark:from-slate-900 dark:via-slate-900/90 dark:to-cyan-950/30 backdrop-blur-xl p-5 shadow-xl border border-white/60 dark:border-slate-800 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/20 flex flex-col justify-between">
       
@@ -49,7 +49,7 @@ export default function CarCard({ car }) {
       <div className="mt-5">
         
       </div>
-         <ActionButtons/>
+         <ActionButtons car={car} onDeleted={onDeleted}/>
     </div>
   );
 }

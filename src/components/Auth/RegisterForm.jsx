@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { User, Mail, Link2, Lock } from "lucide-react";
-import { signUp, signIn } from "@/lib/auth-client"; // আপনার প্রজেক্টের পাথ অনুযায়ী ঠিক করে নিন
+import { signUp, signIn } from "@/lib/auth-client"; 
 
 const RegisterForm = () => {
   const [form, setForm] = useState({ name: "", email: "", photoUrl: "", password: "" });
@@ -16,8 +16,7 @@ const RegisterForm = () => {
     const isLongEnough = value.length >= 6;
     return hasUppercase && hasLowercase && isLongEnough;
   };
-
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!validatePassword(form.password)) {
@@ -41,16 +40,23 @@ const RegisterForm = () => {
         return;
       }
 
-      toast.success("Registration successful. Redirecting to login...");
-      setTimeout(() => {
-        window.location.href = "/login";
-      }, 800);
+
+      await signOut({
+        fetchOptions: {
+          onSuccess: () => {
+            toast.success("Registration successful. Please login now.");
+            setTimeout(() => {
+              window.location.href = "/login";
+            }, 800);
+          },
+        },
+      });
+
     } catch (err) {
       toast.error("An unexpected error occurred.");
       setLoading(false);
     }
   };
-
   const handleGoogleLogin = async () => {
     await signIn.social({
       provider: "google",

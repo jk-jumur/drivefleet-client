@@ -6,6 +6,7 @@ import {
   Input,
   Button,
 } from "@heroui/react";
+import { authClient } from "@/lib/auth-client";
 
 const carTypes = [
   { key: "SUV", label: "SUV" },
@@ -36,8 +37,7 @@ const initialFormData = {
   pickupLocation: "",
   description: "",
   availabilityStatus: "Available",
-  ownerName: "DriveFleet",
-  ownerEmail: "admin@drivefleet.com",
+ 
   bookingCount: 0,
 };
 
@@ -58,36 +58,63 @@ const AddCarForm = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setStatus({ type: "", message: "" });
+  e.preventDefault();
 
-    try {
-      const response = await fetch(`${API_BASE_URL}/cars`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+  setLoading(true);
+  setStatus({ type: "", message: "" });
 
-      const data = await response.json();
+  try {
+    // Get JWT token from Better Auth
+    const { data, error } = await authClient.token();
 
-      if (!response.ok) {
-        throw new Error(data.message || "Failed to add car");
-      }
+    
 
-      toast.success("Car added successfully.");
-      setStatus({ type: "success", message: "Car added successfully." });
-      setFormData(initialFormData);
-    } catch (error) {
-      console.error("Failed to add car:", error);
-      toast.error(error.message || "Failed to add car.");
-      setStatus({ type: "error", message: error.message || "Failed to add car." });
-    } finally {
-      setLoading(false);
+    if (error || !data?.token) {
+      throw new Error("Authentication token not found");
     }
-  };
+
+    const response = await fetch(`${API_BASE_URL}/cars`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${data.token}`,
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const responseData = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        responseData.message || "Failed to add car"
+      );
+    }
+
+    console.log("ADD CAR RESPONSE:", responseData);
+
+    toast.success("Car added successfully.");
+
+    setStatus({
+      type: "success",
+      message: "Car added successfully.",
+    });
+
+    setFormData(initialFormData);
+  } catch (error) {
+    console.error("Failed to add car:", error);
+
+    toast.error(
+      error.message || "Failed to add car."
+    );
+
+    setStatus({
+      type: "error",
+      message: error.message || "Failed to add car.",
+    });
+  } finally {
+    setLoading(false);
+  }
+};
 
 
   const handleSeedAllCars = async () => {
