@@ -5,10 +5,12 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { User, Mail, Link2, Lock } from "lucide-react";
 import { signUp, signIn } from "@/lib/auth-client"; 
+import { redirect, useRouter } from "next/navigation";
 
 const RegisterForm = () => {
   const [form, setForm] = useState({ name: "", email: "", photoUrl: "", password: "" });
   const [loading, setLoading] = useState(false);
+  const router = useRouter()
 
   const validatePassword = (value) => {
     const hasUppercase = /[A-Z]/.test(value);
@@ -32,6 +34,7 @@ const handleSubmit = async (e) => {
         password: form.password,
         name: form.name,
         image: form.photoUrl || "https://via.placeholder.com/150",
+         callbackURL: "/"
       });
 
       if (error) {
@@ -40,19 +43,12 @@ const handleSubmit = async (e) => {
         return;
       }
 
-
-      await signOut({
-        fetchOptions: {
-          onSuccess: () => {
-            toast.success("Registration successful. Please login now.");
-            setTimeout(() => {
-              window.location.href = "/login";
-            }, 800);
-          },
-        },
-      });
+  if(data){
+      router.push("/")
+  }
 
     } catch (err) {
+      console.log("registration", err)
       toast.error("An unexpected error occurred.");
       setLoading(false);
     }

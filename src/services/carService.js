@@ -1,6 +1,6 @@
 import { authClient } from "@/lib/auth-client";
 
-const API_BASE_URL = "http://localhost:5000/api";
+const API_BASE_URL = "https://drivefleet-server-alpha.vercel.app/api";
 
 // ======================================================
 // 1. Fetch all cars (PUBLIC)

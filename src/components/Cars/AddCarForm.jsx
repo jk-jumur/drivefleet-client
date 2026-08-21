@@ -41,7 +41,7 @@ const initialFormData = {
   bookingCount: 0,
 };
 
-const API_BASE_URL = "http://localhost:5000/api";
+const API_BASE_URL = "https://drivefleet-server-alpha.vercel.app/api";
 
 const AddCarForm = () => {
   const [formData, setFormData] = useState(initialFormData);
