@@ -9,7 +9,6 @@ import { FiArrowRight, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 const HeroSlider = ({ sliderData }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % sliderData.length);
@@ -30,7 +29,7 @@ const HeroSlider = ({ sliderData }) => {
 
   return (
     <section className="relative h-[68vh] w-full overflow-hidden bg-[#07111d] sm:h-[74vh] md:h-[80vh]">
-      <div className="network-grid absolute inset-0 z-0 opacity-80" />
+      <div className="network-grid absolute inset-0 z-0 opacity-30" />
 
       <AnimatePresence mode="wait">
         <motion.div
@@ -47,9 +46,10 @@ const HeroSlider = ({ sliderData }) => {
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center opacity-20 grayscale"
+            className="object-cover object-center opacity-65"
           />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(96,165,250,0.18),transparent_24%),linear-gradient(90deg,rgba(2,6,23,0.9)_0%,rgba(2,6,23,0.82)_30%,rgba(2,6,23,0.44)_62%,rgba(2,6,23,0.32)_100%)]" />
+          {/* Lightened gradient overlay for better visibility */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(96,165,250,0.12),transparent_30%),linear-gradient(90deg,rgba(2,6,23,0.75)_0%,rgba(2,6,23,0.55)_40%,rgba(2,6,23,0.2)_70%,rgba(2,6,23,0.1)_100%)]" />
         </motion.div>
       </AnimatePresence>
 
@@ -77,7 +77,7 @@ const HeroSlider = ({ sliderData }) => {
                   </span>
                 </h1>
 
-                <p className="mt-4 max-w-xl text-sm leading-7 text-slate-200 sm:text-base">
+                <p className="mt-4 max-w-xl text-sm leading-7 text-slate-100 sm:text-base drop-shadow-md">
                   {currentSlide.description}
                 </p>
 
